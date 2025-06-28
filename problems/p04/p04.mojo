@@ -18,6 +18,10 @@ fn add_10_2d(
     row = thread_idx.y
     col = thread_idx.x
     # FILL ME IN (roughly 2 lines)
+    if row >= size or col >= size:
+        return
+    global_i = row * size + col
+    output[global_i] = a[global_i] + 10
 
 
 # ANCHOR_END: add_10_2d
