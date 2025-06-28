@@ -20,6 +20,22 @@ fn broadcast_add(
     col = thread_idx.x
     # FILL ME IN (roughly 2 lines)
 
+    # Example of broadcast addition:
+    # a = [[1, 2]] # 1 x 2
+    # b = [[3], [4]] # 2 x 1
+    # output = [[4, 5], [5, 6]] # 2 x 2
+
+    # Explanation:
+    # a is broadcast down the rows (copied to 2 rows)
+    # b is broadcast across the columns (copied to 2 columns)
+    # a → [[1, 2],
+    #      [1, 2]]
+    # b → [[3, 3],
+    #      [4, 4]]
+
+    if row < size and col < size:
+        output[row * size + col] = a[col] + b[row]
+
 
 # ANCHOR_END: broadcast_add
 def main():
