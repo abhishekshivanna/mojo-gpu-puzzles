@@ -27,6 +27,29 @@ fn pooling(
     local_i = thread_idx.x
     # FILL ME IN (roughly 10 lines)
 
+    if global_i < size:
+        shared[local_i] = a[global_i]
+
+    # wait for all threads to complete
+    barrier()
+
+    if global_i < size:
+        s = Scalar[dtype](0)
+        for j in range(3):
+            offset = local_i - j
+            if offset >= 0:
+                s += shared[offset]
+        output[global_i] = s
+    # output[global_i] = s
+    # if global_i == 0:
+    #     output[0] = shared[0]
+    # elif global_i == 1:
+    #     output[1] = shared[0] + shared[1]
+    # elif 1 < global_i < size:
+    #     output[global_i] = (
+    #         shared[local_i - 2] + shared[local_i - 1] + shared[local_i]
+    #     )
+
 
 # ANCHOR_END: pooling
 
